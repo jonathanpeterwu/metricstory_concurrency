@@ -4,21 +4,33 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
+var request = require('request');
 var router = express.Router();
 var app = express();
+var concurrentLibrary = require('./modules/concurrentLibrary')
+var cors = require('cors')
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/api', router.get('/api', function(req, res, next) {
-//   var time = moment().format('HH:MM:SS')
-//   res.json({ time: time})
-// }));
 
+// Initialize module
+concurrentLibrary.init();
 
+app.get('/', router.get('/', function(req, res, next) {
+  var userId = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  concurrentLibrary.limit(userId, function(){
+    request('http://localhost:3000/api', function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("200 okay, hurray!")
+      };
+    })
+  })
+}));
 
 
 ////
