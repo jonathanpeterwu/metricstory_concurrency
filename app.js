@@ -4,11 +4,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
-var app = express();
 var router = express.Router();
-
-// Set port
-app.set('port', 3001);
+var app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -16,10 +13,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api', router.get('/api', function(req, res, next) {
-  var time = moment().format('HH:MM:SS')
-  res.json({ time: time})
-}));
+// app.get('/api', router.get('/api', function(req, res, next) {
+//   var time = moment().format('HH:MM:SS')
+//   res.json({ time: time})
+// }));
+
+
+
+
+////
+//  ERROR CATCHING
+////
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
