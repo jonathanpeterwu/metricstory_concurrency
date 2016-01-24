@@ -1,7 +1,6 @@
 var async = require('async')
 var request = require('request')
 
-var REQUESTS;
 var MAX;
 var QUEUE;
 
@@ -15,7 +14,7 @@ exports.limit = function(userId, callback) {
   QUEUE[userId] ? QUEUE[userId].push(1): QUEUE[userId] = [1];
 
   setTimeout(function() {
-
+    console.log(QUEUE[userId].length)
     // If queue is larger than max split requests
     if (QUEUE[userId].length > MAX) {
       var limits = QUEUE[userId].splice(0, MAX);

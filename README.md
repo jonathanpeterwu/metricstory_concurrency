@@ -16,9 +16,3 @@
 ```
   npm run start
 ```
-
-3) Go to your browser and load localhost:3001/api to see current timestamp
-
-```
-  
-```

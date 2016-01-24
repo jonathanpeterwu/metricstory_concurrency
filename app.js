@@ -26,7 +26,7 @@ app.get('/', router.get('/', function(req, res, next) {
   concurrentLibrary.limit(userId, function(){
     request('http://localhost:3000/api', function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        console.log("200 okay, hurray!")
+        console.log("200 okay, hurray!", response.body)
       };
     })
   })
