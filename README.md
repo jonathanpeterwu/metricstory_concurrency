@@ -16,3 +16,11 @@
 ```
   npm run start
 ```
+
+Testing
+
+To run tests run the `tests/run.js` failed
+
+```
+  node tests/run.js
+```
